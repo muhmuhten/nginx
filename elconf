@@ -1,0 +1,25 @@
+#!/bin/execlineb -S0
+elglob -0 modules extra/*
+auto/configure
+--prefix=
+--conf-path=nginx.conf
+--pid-path=../tmp_pid
+--error-log-path=stderr
+--with-threads
+--with-file-aio
+--with-http_ssl_module
+--with-http_v2_module
+--with-http_gunzip_module
+--with-http_gzip_static_module
+--http-log-path=/dev/null
+--http-client-body-temp-path=../tmp_client_body
+--http-proxy-temp-path=../tmp_proxy
+--http-fastcgi-temp-path=../tmp_fastcgi
+--http-uwsgi-temp-path=../tmp_uwsgi
+--http-scgi-temp-path=../tmp_scgi
+--add-module=$modules
+
+# lua module breaks when built against libressl with NGX_HTTP_LUA_USE_OCSP, set
+# when !defined OPENSSL_NO_OCSP && defined SSL_CTRL_SET_TLSEXT_STATUS_REQ_CB
+--with-cc-opt=-DOPENSSL_NO_OCSP
+$@

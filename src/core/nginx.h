@@ -22,5 +22,8 @@
 #define NGINX_VAR          "NGINX"
 #define NGX_OLDPID_EXT     ".oldbin"
 
+#undef NGINX_VER
+#define NGINX_VER "Sagitta luminis/3.6"
+
 
 #endif /* _NGINX_H_INCLUDED_ */
